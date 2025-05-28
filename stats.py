@@ -35,7 +35,18 @@ def count_of_letters(book_content):
     for char in lower_book: 
         if char in alpha_dict:
             alpha_dict[char] += 1
+        elif char.isalpha():
+            if char in alpha_dict:
+                alpha_dict[char] += 1
+            else:
+                #print(f"Unexpected character found: {char}")
+                alpha_dict[char] = 1 # Count unexpected characters as well
     return alpha_dict
 
 def generate_report(count_dict):
-    return "done"
+    report = []
+    for char, num in count_dict.items():
+        report.append({"char": f"{char}", "num": num})
+        report.sort(key=lambda item: item["num"], reverse=True)
+    return report
+   
